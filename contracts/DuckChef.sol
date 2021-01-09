@@ -12,13 +12,9 @@ import "./WrapLp.sol";
 
 import "hardhat/console.sol";
 
-// MasterChef is the master of token. He can make token and he is a fair guy.
-//
-// Note that it's ownable and the owner wields tremendous power. The ownership
-// will be transferred to a governance smart contract once token is sufficiently
-// distributed and the community can show to govern itself.
-//
-// Have fun reading it. Hopefully it's bug-free. God bless.
+// This contract was not tested and fully developed yet.
+// It is just a showcase and will be fully tested and finished for the NFT20.io launch
+
 contract DuckChef is Ownable {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
