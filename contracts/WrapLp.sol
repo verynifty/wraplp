@@ -64,18 +64,14 @@ contract NFTLP is ERC721Burnable {
 
         totalStaked[erc20address] = totalStaked[erc20address].add(amount);
 
-        // give minter role to this contract
         _mint(msg.sender, _tokenIdTracker.current());
 
         _tokenIdTracker.increment();
     }
 
-    // instead of withdraw I am overriding the burn function from NFTs.
-    // this is because if there was withdraw and someone executes burn, it would burn the token and
-    // not delete the struct or make blance go down or send LP tokens back.
-    // not sure about this let me know.
+    // instead of a withdraw() func we're overriding the burn function from NFTs.
+    // This is to avoid people executing the burn function and making the LP tokens stuck in the contract.
     function burn(uint256 tokenId) public override {
-        //solhint-disable-next-line max-line-length
         require(
             _isApprovedOrOwner(_msgSender(), tokenId),
             "ERC721Burnable: caller is not owner nor approved"
