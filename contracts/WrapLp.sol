@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Burnable.sol";
 
-contract NFTLP is ERC721Burnable {
+contract WrapLp is ERC721Burnable {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
