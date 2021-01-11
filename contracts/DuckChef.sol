@@ -222,25 +222,21 @@ contract DuckChef is Ownable {
         pool.lastRewardBlock = block.number;
     }
 
-    // Register WrapLp token to DuckChef for $TOKEN allocation.
+    // Register your wrapped lp tokens NFT to DuckChef for $YIELD allocation.
     function register(uint256 _pid, uint256 _nftId) public {
         PoolInfo storage pool = poolInfo[_pid];
+
         (address _erc20address, uint256 _amount, ) = wrapLp.getNFTInfo(_nftId);
+
         require(_erc20address == address(pool.lpToken), "NFT don't match pool");
         require(wrapLp.ownerOf(_nftId) == msg.sender, "!owner");
-        NftInfo storage nft = nftInfo[_nftId];
 
+        NftInfo storage nft = nftInfo[_nftId];
         require(nft.amount == 0, "Can't register twice");
 
+
         updatePool(_pid);
-
         nft.amount = _amount;
-
-        // @Maybe we can ake this out as it will be by single NFT each time and when withdraw
-        // NFT info is deleted.
-
-        // TODO! check this, without this was returning 0 all the time.
-        // nft.rewardDebt = nft.amount.mul(pool.accTokenPerShare).div(1e12);
         emit Deposit(msg.sender, _pid, _nftId);
     }
 
