@@ -10,7 +10,7 @@ import "../interfaces/IERC20MintBurn.sol";
 import "../interfaces/IWrapLp.sol";
 import "./WrapLp.sol";
 
-import "hardhat/console.sol";
+// import "hardhat/console.sol";
 
 // This contract was not tested and fully developed yet.
 // It is just a showcase and will be fully tested and finished for the NFT20.io launch
@@ -156,13 +156,10 @@ contract DuckChef is Ownable {
     {
         PoolInfo storage pool = poolInfo[_pid];
         NftInfo storage nft = nftInfo[_nftId];
-        console.log("amount", nft.amount);
         uint256 accTokenPerShare = pool.accTokenPerShare;
-        console.log("accTokenPerShare", accTokenPerShare);
 
         uint256 lpSupply = wrapLp.totalStaked(address(pool.lpToken));
 
-        console.log("lpSupply", lpSupply);
 
         // uint256 lpSupply = pool.lpToken.balanceOf(address(this));
         if (block.number > pool.lastRewardBlock && lpSupply != 0) {
@@ -176,14 +173,8 @@ contract DuckChef is Ownable {
                 tokenReward.mul(1e12).div(lpSupply)
             );
 
-            console.log("accTokenPerShare", accTokenPerShare);
         }
 
-        console.log(
-            "last",
-            nft.amount.mul(accTokenPerShare).div(1e12).sub(nft.rewardDebt)
-        );
-        console.log("nft.rewardDebt", nft.rewardDebt);
 
         return nft.amount.mul(accTokenPerShare).div(1e12).sub(nft.rewardDebt);
     }
